@@ -1,16 +1,24 @@
 <script>
     import { onMount } from 'svelte';
     import RecordRTC, { MediaStreamRecorder, WhammyRecorder } from './RecordRTC.js';
+    import Webcam from 'webcam-easy';
     let videoRecorder;
     let videoRecorded;
     let videoRecordedURL;
     let recorder;
+    let webcamElement;
+    let canvasElement;
+    let webcam;
 
     onMount(() => {
         videoRecorder  = document.getElementById("video-recorder");
         videoRecorded = document.getElementById("video-recorded");
+        webcamElement = document.getElementById('webcam');
+        canvasElement = document.getElementById('canvas');
+        webcam = new Webcam(webcamElement, 'user', canvasElement);
+
 	});
-    console.log('MediaStreamRecorder: ', MediaStreamRecorder,'WhammyRecorder: ', WhammyRecorder)
+
     export const handleRecordVideo = () => {
         const recordingTimeMS = 6000;
         console.log(videoRecorder)
@@ -76,6 +84,22 @@
         // Assign video file to `input file for prepare to upload`
     }
 
+    const startWebcam = () => {
+        webcam.start()
+        .then(result =>{
+            console.log("webcam started");
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
+
+    const handleTakePicture = () => {
+        const picture = webcam.snap();
+        console.log('picture =>', picture)
+        webcam.stop();
+    }
+
 </script>
 <link rel="stylesheet" href="video-verify-identity.css" />
 
@@ -101,6 +125,25 @@
             </div>
             <p id="not-verify-message" class="upload-document-error" style="display: none; margin-bottom: 10px;">กรุณายืนยันตัวตน</p>
             <p id="video-verify-success-message" class="upload-success" style="display: none; margin-bottom: 10px;">วิดีโอของท่านได้รับการบันทึกเรียบร้อยแล้ว</p>
+        </div>
+    </content>
+    <content class="video-recorder-content-container">
+        <div class="content-wrapper">
+            <div class="video-recorder-header-message">
+                <span>Web Cam Capture</span>
+            </div>
+            <div class="video-recorder-wrapper">
+                <video id="webcam" autoplay playsinline width="640" height="480"></video>
+                <canvas id="canvas" class="d-none"></canvas>
+            </div>
+            <div class="start-verify-button-wrapper">
+                <button class="start-verify-button" on:click={startWebcam}>
+                    <span>Start webcam</span>
+                </button>
+                <button class="start-verify-button" on:click={handleTakePicture}>
+                    <span>take a picture</span>
+                </button>
+            </div>
         </div>
     </content>
 </div>
