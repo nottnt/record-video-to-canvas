@@ -133,7 +133,7 @@
                 <span>Web Cam Capture</span>
             </div>
             <div class="video-recorder-wrapper">
-                <video id="webcam" autoplay playsinline width="640" height="480"></video>
+                <video id="webcam" autoplay muted playsinline></video>
                 <canvas id="canvas" class="d-none"></canvas>
             </div>
             <div class="start-verify-button-wrapper">
