@@ -107,3 +107,7 @@ Then, from within your project folder:
 npm run build
 surge public my-project.surge.sh
 ```
+
+### With [GHPages](https://pages.github.com/)
+
+https://docs.github.com/en/pages/quickstart
