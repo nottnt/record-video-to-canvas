@@ -6,7 +6,9 @@
     "build": "rollup -c",
     "dev": "rollup -c -w --port=5002",
     "start": "sirv public --no-clear --port=5002",
-    "deploy": "node ./gh-pages.js"
+    "deploy": "node ./gh-pages.js",
+    "deploy-test":"npx gh-pages -d public",
+    "deploy-demo": "git push origin :gh-pages && git subtree push --prefix build origin gh-pages"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
@@ -19,7 +21,7 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
-    "gh-pages": "^3.2.3",
+    "gh-pages": "^4.0.0",
     "sirv-cli": "^1.0.0",
     "webcam-easy": "^1.0.5",
     "webrtc-adapter": "^8.1.0"
