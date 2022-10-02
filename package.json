@@ -21,6 +21,7 @@
   "dependencies": {
     "gh-pages": "^3.2.3",
     "sirv-cli": "^1.0.0",
+    "vercel": "^28.4.5",
     "webcam-easy": "^1.0.5",
     "webrtc-adapter": "^8.1.0"
   }
